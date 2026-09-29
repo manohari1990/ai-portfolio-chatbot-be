@@ -1,0 +1,217 @@
+// use prisma-8
+
+// Portfolio Content
+model User{
+  user_id Uuid @id @default(uuid())
+  email String @unique
+  first_name String 
+  last_name String?
+  portfolios Portfolio[]
+  created_at TimestamptzString @default(now())
+  updated_at temporal.updatedAtString()
+}
+
+model Portfolio{
+  portfolio_id Uuid @id @default(uuid())
+  
+  user User @relation(
+      fields: [user_id],
+      references: [user_id],
+      onDelete: Cascade
+    )
+  user_id Uuid
+
+  portfolio_name String
+  slug String @unique
+  description String?
+
+  professional_profile ProfessionalProfile?
+  certifications Certification[]
+  skills Skill[]
+  projects Project[]
+  experiences Experience[]
+  chatbot_config ChatbotConfig?
+  chat_sessions ChatSession[]
+  
+  is_active Boolean @default(true)
+  created_at TimestamptzString @default(now())
+  updated_at temporal.updatedAtString()
+}
+
+model ProfessionalProfile{
+  profile_id Uuid @id @default(uuid())
+  
+  portfolio Portfolio @relation(
+      fields: [portfolio_id],
+      references: [portfolio_id],
+      onDelete: Cascade
+    )
+  portfolio_id Uuid @unique
+  
+  total_exp_years Decimal
+  bio String
+  github_url String?
+  linkedin_url String?
+  resume_file_id String?
+}
+
+model Certification{
+  certification_id Uuid @id @default(uuid())
+  
+  portfolio Portfolio @relation(
+      fields:[portfolio_id],
+      references:[portfolio_id],
+      onDelete: Cascade
+    )
+  portfolio_id Uuid
+
+  name String
+  issuing_organization String
+  issue_date TimestamptzString
+  expiry_date TimestamptzString?
+  credential_id String?
+  credential_url String?
+  specialization String?
+}
+
+model Skill{
+  skill_id Uuid @id @default(uuid())
+  
+  portfolio Portfolio @relation(
+      fields:[portfolio_id],
+      references:[portfolio_id],
+      onDelete: Cascade
+    )
+  portfolio_id Uuid
+
+  skill_category String
+  skill_name String
+  expertise_level String?
+}
+
+model Project{
+  project_id Uuid @id @default(uuid())
+  
+  portfolio Portfolio @relation(
+      fields:[portfolio_id],
+      references: [portfolio_id],
+      onDelete: Cascade
+    )
+  portfolio_id Uuid
+
+  project_technologies ProjectTechnology[]
+  
+  name String
+  start_date TimestamptzString
+  end_date TimestamptzString
+  client String?
+  description String
+  onsite Boolean?
+  responsibilities String
+  project_url String?
+}
+
+model ProjectTechnology{
+  proj_tech_id Uuid @id @default(uuid())
+  
+  project Project @relation(
+    fields: [project_id],
+    references: [project_id],
+    onDelete: Cascade
+  )
+  project_id Uuid
+
+  technology String
+}
+
+model Experience{
+  experience_id Uuid @id @default(uuid())
+
+  portfolio Portfolio @relation(
+    fields: [portfolio_id],
+    references: [portfolio_id],
+    onDelete: Cascade
+  )
+  portfolio_id Uuid
+
+  experience_technologies ExperienceTechnology[]
+
+  role_name String
+  company_name String
+  location String?
+  start_date TimestamptzString
+  end_date TimestamptzString?
+
+  is_current Boolean @default(false)
+  role_description String
+}
+
+model ExperienceTechnology{
+  exp_tech_id Uuid @id @default(uuid())
+  
+  experience Experience @relation(
+    fields: [experience_id],
+    references: [experience_id],
+    onDelete: Cascade
+  )
+  experience_id Uuid
+
+  technology String
+}
+
+// Chatbot Configuration
+model ChatbotConfig{
+  chatbot_config_id Uuid @id @default(uuid())
+  
+  portfolio Portfolio @relation(
+    fields: [portfolio_id],
+    references: [portfolio_id],
+    onDelete: Cascade
+  )
+  portfolio_id Uuid @unique
+
+  public_key String @unique
+  name String
+  welcome_message String
+  enabled Boolean @default(true)
+  
+  created_at TimestamptzString @default(now())
+  updated_at temporal.updatedAtString()
+}
+
+// Conversation
+model ChatSession{
+  session_id Uuid @id @default(uuid())
+
+  portfolio Portfolio @relation(
+    fields: [portfolio_id],
+    references: [portfolio_id],
+    onDelete: Cascade
+  )
+  portfolio_id Uuid
+
+  chat_messages ChatMessage[]
+
+  visitor_id Uuid
+  started_at TimestamptzString @default(now())
+  ended_at TimestamptzString?
+}
+
+model ChatMessage{
+  message_id Uuid @id @default(uuid())
+  
+  session ChatSession @relation(
+    fields: [session_id],
+    references: [session_id],
+    onDelete: Cascade
+  )
+  session_id Uuid
+
+  role String
+  content String
+  created_at TimestamptzString @default(now())
+}
+
+
+
+

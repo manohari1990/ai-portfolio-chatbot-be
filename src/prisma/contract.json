@@ -1,0 +1,2424 @@
+{
+  "schemaVersion": "1",
+  "targetFamily": "sql",
+  "target": "postgres",
+  "profileHash": "3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2",
+  "roots": {
+    "Certification": {
+      "model": "Certification",
+      "namespace": "public"
+    },
+    "ChatMessage": {
+      "model": "ChatMessage",
+      "namespace": "public"
+    },
+    "ChatSession": {
+      "model": "ChatSession",
+      "namespace": "public"
+    },
+    "ChatbotConfig": {
+      "model": "ChatbotConfig",
+      "namespace": "public"
+    },
+    "Experience": {
+      "model": "Experience",
+      "namespace": "public"
+    },
+    "ExperienceTechnology": {
+      "model": "ExperienceTechnology",
+      "namespace": "public"
+    },
+    "Portfolio": {
+      "model": "Portfolio",
+      "namespace": "public"
+    },
+    "ProfessionalProfile": {
+      "model": "ProfessionalProfile",
+      "namespace": "public"
+    },
+    "Project": {
+      "model": "Project",
+      "namespace": "public"
+    },
+    "ProjectTechnology": {
+      "model": "ProjectTechnology",
+      "namespace": "public"
+    },
+    "Skill": {
+      "model": "Skill",
+      "namespace": "public"
+    },
+    "User": {
+      "model": "User",
+      "namespace": "public"
+    }
+  },
+  "domain": {
+    "namespaces": {
+      "public": {
+        "models": {
+          "Certification": {
+            "fields": {
+              "certification_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "credential_id": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "credential_url": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "expiry_date": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "issue_date": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "issuing_organization": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "specialization": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "portfolio": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Portfolio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "certification_id": {
+                  "column": "certification_id"
+                },
+                "credential_id": {
+                  "column": "credential_id"
+                },
+                "credential_url": {
+                  "column": "credential_url"
+                },
+                "expiry_date": {
+                  "column": "expiry_date"
+                },
+                "issue_date": {
+                  "column": "issue_date"
+                },
+                "issuing_organization": {
+                  "column": "issuing_organization"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "portfolio_id": {
+                  "column": "portfolio_id"
+                },
+                "specialization": {
+                  "column": "specialization"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Certification"
+            }
+          },
+          "ChatMessage": {
+            "fields": {
+              "content": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "created_at": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "message_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "role": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "session_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "session": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "session_id"
+                  ],
+                  "targetFields": [
+                    "session_id"
+                  ]
+                },
+                "to": {
+                  "model": "ChatSession",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "content": {
+                  "column": "content"
+                },
+                "created_at": {
+                  "column": "created_at"
+                },
+                "message_id": {
+                  "column": "message_id"
+                },
+                "role": {
+                  "column": "role"
+                },
+                "session_id": {
+                  "column": "session_id"
+                }
+              },
+              "namespaceId": "public",
+              "table": "ChatMessage"
+            }
+          },
+          "ChatSession": {
+            "fields": {
+              "ended_at": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "session_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "started_at": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "visitor_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "chat_message": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "session_id"
+                  ],
+                  "targetFields": [
+                    "session_id"
+                  ]
+                },
+                "to": {
+                  "model": "ChatMessage",
+                  "namespace": "public"
+                }
+              },
+              "portfolio": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Portfolio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "ended_at": {
+                  "column": "ended_at"
+                },
+                "portfolio_id": {
+                  "column": "portfolio_id"
+                },
+                "session_id": {
+                  "column": "session_id"
+                },
+                "started_at": {
+                  "column": "started_at"
+                },
+                "visitor_id": {
+                  "column": "visitor_id"
+                }
+              },
+              "namespaceId": "public",
+              "table": "ChatSession"
+            }
+          },
+          "ChatbotConfig": {
+            "fields": {
+              "chatbot_config_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "created_at": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "enabled": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "public_key": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "updated_at": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "welcome_message": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "portfolio": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Portfolio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "chatbot_config_id": {
+                  "column": "chatbot_config_id"
+                },
+                "created_at": {
+                  "column": "created_at"
+                },
+                "enabled": {
+                  "column": "enabled"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "portfolio_id": {
+                  "column": "portfolio_id"
+                },
+                "public_key": {
+                  "column": "public_key"
+                },
+                "updated_at": {
+                  "column": "updated_at"
+                },
+                "welcome_message": {
+                  "column": "welcome_message"
+                }
+              },
+              "namespaceId": "public",
+              "table": "ChatbotConfig"
+            }
+          },
+          "Experience": {
+            "fields": {
+              "company_name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "end_date": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "experience_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "is_current": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "location": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "role_description": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "role_name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "start_date": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "experience_technology": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "experience_id"
+                  ],
+                  "targetFields": [
+                    "experience_id"
+                  ]
+                },
+                "to": {
+                  "model": "ExperienceTechnology",
+                  "namespace": "public"
+                }
+              },
+              "portfolio": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Portfolio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "company_name": {
+                  "column": "company_name"
+                },
+                "end_date": {
+                  "column": "end_date"
+                },
+                "experience_id": {
+                  "column": "experience_id"
+                },
+                "is_current": {
+                  "column": "is_current"
+                },
+                "location": {
+                  "column": "location"
+                },
+                "portfolio_id": {
+                  "column": "portfolio_id"
+                },
+                "role_description": {
+                  "column": "role_description"
+                },
+                "role_name": {
+                  "column": "role_name"
+                },
+                "start_date": {
+                  "column": "start_date"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Experience"
+            }
+          },
+          "ExperienceTechnology": {
+            "fields": {
+              "exp_tech_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "experience_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "technology": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "experience": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "experience_id"
+                  ],
+                  "targetFields": [
+                    "experience_id"
+                  ]
+                },
+                "to": {
+                  "model": "Experience",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "exp_tech_id": {
+                  "column": "exp_tech_id"
+                },
+                "experience_id": {
+                  "column": "experience_id"
+                },
+                "technology": {
+                  "column": "technology"
+                }
+              },
+              "namespaceId": "public",
+              "table": "ExperienceTechnology"
+            }
+          },
+          "Portfolio": {
+            "fields": {
+              "created_at": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "description": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "is_active": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "slug": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "updated_at": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "user_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "certification": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Certification",
+                  "namespace": "public"
+                }
+              },
+              "chat_session": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "ChatSession",
+                  "namespace": "public"
+                }
+              },
+              "chatbot_config": {
+                "cardinality": "1:1",
+                "nullable": true,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "ChatbotConfig",
+                  "namespace": "public"
+                }
+              },
+              "experience": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Experience",
+                  "namespace": "public"
+                }
+              },
+              "professional_profile": {
+                "cardinality": "1:1",
+                "nullable": true,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "ProfessionalProfile",
+                  "namespace": "public"
+                }
+              },
+              "project": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Project",
+                  "namespace": "public"
+                }
+              },
+              "skill": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Skill",
+                  "namespace": "public"
+                }
+              },
+              "user": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "user_id"
+                  ],
+                  "targetFields": [
+                    "user_id"
+                  ]
+                },
+                "to": {
+                  "model": "User",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "created_at": {
+                  "column": "created_at"
+                },
+                "description": {
+                  "column": "description"
+                },
+                "is_active": {
+                  "column": "is_active"
+                },
+                "portfolio_id": {
+                  "column": "portfolio_id"
+                },
+                "portfolio_name": {
+                  "column": "portfolio_name"
+                },
+                "slug": {
+                  "column": "slug"
+                },
+                "updated_at": {
+                  "column": "updated_at"
+                },
+                "user_id": {
+                  "column": "user_id"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Portfolio"
+            }
+          },
+          "ProfessionalProfile": {
+            "fields": {
+              "bio": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "github_url": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "linkedin_url": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "profile_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "resume_file_id": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "total_exp_years": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/numeric@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "portfolio": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Portfolio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "bio": {
+                  "column": "bio"
+                },
+                "github_url": {
+                  "column": "github_url"
+                },
+                "linkedin_url": {
+                  "column": "linkedin_url"
+                },
+                "portfolio_id": {
+                  "column": "portfolio_id"
+                },
+                "profile_id": {
+                  "column": "profile_id"
+                },
+                "resume_file_id": {
+                  "column": "resume_file_id"
+                },
+                "total_exp_years": {
+                  "column": "total_exp_years"
+                }
+              },
+              "namespaceId": "public",
+              "table": "ProfessionalProfile"
+            }
+          },
+          "Project": {
+            "fields": {
+              "client": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "description": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "end_date": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "onsite": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "project_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "project_url": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "responsibilities": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "start_date": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "portfolio": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Portfolio",
+                  "namespace": "public"
+                }
+              },
+              "project_technologies": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "project_id"
+                  ],
+                  "targetFields": [
+                    "project_id"
+                  ]
+                },
+                "to": {
+                  "model": "ProjectTechnology",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "client": {
+                  "column": "client"
+                },
+                "description": {
+                  "column": "description"
+                },
+                "end_date": {
+                  "column": "end_date"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "onsite": {
+                  "column": "onsite"
+                },
+                "portfolio_id": {
+                  "column": "portfolio_id"
+                },
+                "project_id": {
+                  "column": "project_id"
+                },
+                "project_url": {
+                  "column": "project_url"
+                },
+                "responsibilities": {
+                  "column": "responsibilities"
+                },
+                "start_date": {
+                  "column": "start_date"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Project"
+            }
+          },
+          "ProjectTechnology": {
+            "fields": {
+              "proj_tech_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "project_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "technology": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "project": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "project_id"
+                  ],
+                  "targetFields": [
+                    "project_id"
+                  ]
+                },
+                "to": {
+                  "model": "Project",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "proj_tech_id": {
+                  "column": "proj_tech_id"
+                },
+                "project_id": {
+                  "column": "project_id"
+                },
+                "technology": {
+                  "column": "technology"
+                }
+              },
+              "namespaceId": "public",
+              "table": "ProjectTechnology"
+            }
+          },
+          "Skill": {
+            "fields": {
+              "expertise_level": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "portfolio_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "skill_category": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "skill_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              },
+              "skill_name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "portfolio": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "portfolio_id"
+                  ],
+                  "targetFields": [
+                    "portfolio_id"
+                  ]
+                },
+                "to": {
+                  "model": "Portfolio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "expertise_level": {
+                  "column": "expertise_level"
+                },
+                "portfolio_id": {
+                  "column": "portfolio_id"
+                },
+                "skill_category": {
+                  "column": "skill_category"
+                },
+                "skill_id": {
+                  "column": "skill_id"
+                },
+                "skill_name": {
+                  "column": "skill_name"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Skill"
+            }
+          },
+          "User": {
+            "fields": {
+              "created_at": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "email": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "first_name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "last_name": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "updated_at": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "kind": "scalar"
+                }
+              },
+              "user_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/uuid@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "portfolio": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "user_id"
+                  ],
+                  "targetFields": [
+                    "user_id"
+                  ]
+                },
+                "to": {
+                  "model": "Portfolio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "created_at": {
+                  "column": "created_at"
+                },
+                "email": {
+                  "column": "email"
+                },
+                "first_name": {
+                  "column": "first_name"
+                },
+                "last_name": {
+                  "column": "last_name"
+                },
+                "updated_at": {
+                  "column": "updated_at"
+                },
+                "user_id": {
+                  "column": "user_id"
+                }
+              },
+              "namespaceId": "public",
+              "table": "User"
+            }
+          }
+        }
+      }
+    }
+  },
+  "storage": {
+    "namespaces": {
+      "public": {
+        "entries": {
+          "table": {
+            "Certification": {
+              "columns": {
+                "certification_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "credential_id": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "credential_url": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "expiry_date": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": true
+                },
+                "issue_date": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "issuing_organization": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "portfolio_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "specialization": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Certification"
+                  },
+                  "target": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Portfolio"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "portfolio_id"
+                  ],
+                  "name": "Certification_portfolio_id_idx_7fa2c1d1",
+                  "prefix": "Certification_portfolio_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "certification_id"
+                ]
+              },
+              "uniques": []
+            },
+            "ChatMessage": {
+              "columns": {
+                "content": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "created_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "message_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "role": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "session_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "session_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "ChatMessage"
+                  },
+                  "target": {
+                    "columns": [
+                      "session_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "ChatSession"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "session_id"
+                  ],
+                  "name": "ChatMessage_session_id_idx_00ba47bf",
+                  "prefix": "ChatMessage_session_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "message_id"
+                ]
+              },
+              "uniques": []
+            },
+            "ChatSession": {
+              "columns": {
+                "ended_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": true
+                },
+                "portfolio_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "session_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "started_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "visitor_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "ChatSession"
+                  },
+                  "target": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Portfolio"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "portfolio_id"
+                  ],
+                  "name": "ChatSession_portfolio_id_idx_7fa2c1d1",
+                  "prefix": "ChatSession_portfolio_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "session_id"
+                ]
+              },
+              "uniques": []
+            },
+            "ChatbotConfig": {
+              "columns": {
+                "chatbot_config_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "created_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "enabled": {
+                  "codecId": "pg/bool@1",
+                  "default": {
+                    "kind": "literal",
+                    "value": true
+                  },
+                  "nativeType": "bool",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "portfolio_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "public_key": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "updated_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "welcome_message": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "ChatbotConfig"
+                  },
+                  "target": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Portfolio"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "chatbot_config_id"
+                ]
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "portfolio_id"
+                  ]
+                }
+              ]
+            },
+            "Experience": {
+              "columns": {
+                "company_name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "end_date": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": true
+                },
+                "experience_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "is_current": {
+                  "codecId": "pg/bool@1",
+                  "default": {
+                    "kind": "literal",
+                    "value": false
+                  },
+                  "nativeType": "bool",
+                  "nullable": false
+                },
+                "location": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "portfolio_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "role_description": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "role_name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "start_date": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Experience"
+                  },
+                  "target": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Portfolio"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "portfolio_id"
+                  ],
+                  "name": "Experience_portfolio_id_idx_7fa2c1d1",
+                  "prefix": "Experience_portfolio_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "experience_id"
+                ]
+              },
+              "uniques": []
+            },
+            "ExperienceTechnology": {
+              "columns": {
+                "exp_tech_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "experience_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "technology": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "experience_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "ExperienceTechnology"
+                  },
+                  "target": {
+                    "columns": [
+                      "experience_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Experience"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "experience_id"
+                  ],
+                  "name": "ExperienceTechnology_experience_id_idx_9b808d03",
+                  "prefix": "ExperienceTechnology_experience_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "exp_tech_id"
+                ]
+              },
+              "uniques": []
+            },
+            "Portfolio": {
+              "columns": {
+                "created_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "description": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "is_active": {
+                  "codecId": "pg/bool@1",
+                  "default": {
+                    "kind": "literal",
+                    "value": true
+                  },
+                  "nativeType": "bool",
+                  "nullable": false
+                },
+                "portfolio_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "portfolio_name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "slug": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "updated_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "user_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "user_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Portfolio"
+                  },
+                  "target": {
+                    "columns": [
+                      "user_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "User"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "user_id"
+                  ],
+                  "name": "Portfolio_user_id_idx_6c952402",
+                  "prefix": "Portfolio_user_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "portfolio_id"
+                ]
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "slug"
+                  ]
+                }
+              ]
+            },
+            "ProfessionalProfile": {
+              "columns": {
+                "bio": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "github_url": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "linkedin_url": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "portfolio_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "profile_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "resume_file_id": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "total_exp_years": {
+                  "codecId": "pg/numeric@1",
+                  "nativeType": "numeric",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "ProfessionalProfile"
+                  },
+                  "target": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Portfolio"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "profile_id"
+                ]
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "portfolio_id"
+                  ]
+                }
+              ]
+            },
+            "Project": {
+              "columns": {
+                "client": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "description": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "end_date": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "onsite": {
+                  "codecId": "pg/bool@1",
+                  "nativeType": "bool",
+                  "nullable": true
+                },
+                "portfolio_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "project_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "project_url": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "responsibilities": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "start_date": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Project"
+                  },
+                  "target": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Portfolio"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "portfolio_id"
+                  ],
+                  "name": "Project_portfolio_id_idx_7fa2c1d1",
+                  "prefix": "Project_portfolio_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "project_id"
+                ]
+              },
+              "uniques": []
+            },
+            "ProjectTechnology": {
+              "columns": {
+                "proj_tech_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "project_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "technology": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "project_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "ProjectTechnology"
+                  },
+                  "target": {
+                    "columns": [
+                      "project_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Project"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "project_id"
+                  ],
+                  "name": "ProjectTechnology_project_id_idx_6ad92603",
+                  "prefix": "ProjectTechnology_project_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "proj_tech_id"
+                ]
+              },
+              "uniques": []
+            },
+            "Skill": {
+              "columns": {
+                "expertise_level": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "portfolio_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "skill_category": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "skill_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                },
+                "skill_name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "source": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Skill"
+                  },
+                  "target": {
+                    "columns": [
+                      "portfolio_id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Portfolio"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "portfolio_id"
+                  ],
+                  "name": "Skill_portfolio_id_idx_7fa2c1d1",
+                  "prefix": "Skill_portfolio_id_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "skill_id"
+                ]
+              },
+              "uniques": []
+            },
+            "User": {
+              "columns": {
+                "created_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "email": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "first_name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "last_name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "updated_at": {
+                  "codecId": "pg/timestamptz-string@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "user_id": {
+                  "codecId": "pg/uuid@1",
+                  "nativeType": "uuid",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "user_id"
+                ]
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "email"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "id": "public",
+        "kind": "postgres-schema"
+      }
+    },
+    "storageHash": "2beec3ba81a67b6356fbf0b4f79fdd083543bfc8415c31431b88c55f4a5a17ca"
+  },
+  "execution": {
+    "executionHash": "3ea35b53238a27486ecee503e8ba30d554fb635499d75a6f90ca2291f0782ce4",
+    "mutations": {
+      "defaults": [
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "certification_id",
+            "namespace": "public",
+            "table": "Certification"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "chatbot_config_id",
+            "namespace": "public",
+            "table": "ChatbotConfig"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "updated_at",
+            "namespace": "public",
+            "table": "ChatbotConfig"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "message_id",
+            "namespace": "public",
+            "table": "ChatMessage"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "session_id",
+            "namespace": "public",
+            "table": "ChatSession"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "experience_id",
+            "namespace": "public",
+            "table": "Experience"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "exp_tech_id",
+            "namespace": "public",
+            "table": "ExperienceTechnology"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "portfolio_id",
+            "namespace": "public",
+            "table": "Portfolio"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "updated_at",
+            "namespace": "public",
+            "table": "Portfolio"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "profile_id",
+            "namespace": "public",
+            "table": "ProfessionalProfile"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "project_id",
+            "namespace": "public",
+            "table": "Project"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "proj_tech_id",
+            "namespace": "public",
+            "table": "ProjectTechnology"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "skill_id",
+            "namespace": "public",
+            "table": "Skill"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "updated_at",
+            "namespace": "public",
+            "table": "User"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "user_id",
+            "namespace": "public",
+            "table": "User"
+          }
+        }
+      ]
+    }
+  },
+  "capabilities": {
+    "postgres": {
+      "distinctOn": true,
+      "jsonAgg": true,
+      "lateral": true,
+      "limit": true,
+      "orderBy": true,
+      "returning": true
+    },
+    "sql": {
+      "checkConstraint": true,
+      "defaultInInsert": true,
+      "enums": true,
+      "insertOnConflictSkip": true,
+      "insertOnConflictWithoutTarget": true,
+      "lateral": true,
+      "returning": true,
+      "scalarList": true
+    }
+  },
+  "extensions": {},
+  "meta": {},
+  "_generated": {
+    "warning": "⚠️  GENERATED FILE - DO NOT EDIT",
+    "message": "This file is automatically generated by \"prisma contract emit\".",
+    "regenerate": "To regenerate, run: prisma contract emit"
+  }
+}
