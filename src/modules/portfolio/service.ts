@@ -53,7 +53,7 @@ export class PortfolioService {
         .where({
           portfolio_id: portfolioId,
           user_id: userId
-        }).include("skill").include("certification").include("experience").include("project").first()
+        }).include("skill").include("certification").include("experience").include("project").include("professional_profile").first()
 
     if (!portfolio) {
       const error = new Error("Portfolio not found");
