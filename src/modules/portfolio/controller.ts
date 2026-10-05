@@ -20,7 +20,7 @@ export const NewPortfolio = async (
      * In production this MUST come from req.user.
      */
     const userId = request.body.user_id;
-    
+
     if (!userId) {
       return response.status(401).json({
         success: false,
@@ -73,6 +73,36 @@ export const NewPortfolio = async (
   }
 };
 
+
+export const GetPortfolioByUser = async ( request: AuthenticatedRequest, response: Response ) => {
+  try {
+    const validation = getPortfoliosQuerySchema.safeParse(request.params);
+    if (!validation.success) {
+      return response.status(400).json({
+        success: false,
+        message: "Invalid query parameters",
+        errors: validation.error.issues,
+      });
+    }
+
+    const portfolio = await PortfolioService.getByUserId(validation.data.user_id);
+    return response.status(200).json({
+      success: true,
+      data: portfolio,
+    });
+
+  } catch (err) {
+    console.error( "Fetch Portfolio error: ", err )
+    const statusCode = (err as Error & {
+      statusCode?: number;
+    }).statusCode ?? 500
+    return response.status(statusCode).json({
+      success: false,
+      message: statusCode === 500 ? "Internal Server Error" : (err as Error).message
+    })
+  }
+}
+
 export const GetAllPortfolio = async (
   request: AuthenticatedRequest,
   response: Response
@@ -87,12 +117,9 @@ export const GetAllPortfolio = async (
         errors: validation.error.issues,
       });
     }
-
-    const userId = validation.data.user_id;
-
     const portfolio =
       await PortfolioService.getById(
-        userId,
+        validation.data.user_id,
         validation.data.id
       );
 
@@ -197,7 +224,7 @@ export const DeletePortfolio = async (
 ) => {
   try {
     const userId = request.body.user_id;
-    console.log(userId,"==================userId")
+    console.log(userId, "==================userId")
     if (!userId) {
       return response.status(401).json({
         success: false,
@@ -209,7 +236,7 @@ export const DeletePortfolio = async (
       portfolioIdSchema.safeParse(
         request.params
       );
-    console.log(validation,"===================validation")
+    console.log(validation, "===================validation")
 
     if (!validation.success) {
       return response.status(400).json({

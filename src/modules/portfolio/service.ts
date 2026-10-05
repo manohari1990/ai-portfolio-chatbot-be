@@ -29,6 +29,21 @@ export class PortfolioService {
     return portfolio;
   }
 
+  static async getByUserId( userId: string ){
+    const userPortfolio = 
+      await db.orm.public.Portfolio
+      .include('user', (u)=> u.select('first_name', 'last_name', 'email').limit(1))
+      .where({
+        user_id: userId
+      }).include("skill").include("project").include("certification").include("experience").all()
+      if(!userPortfolio){
+        const error = new Error("No Portfolio existed!");
+        (error as Error & {statusCode?:number}).statusCode = 404;
+        throw error;
+      }
+      return userPortfolio
+  }
+
   static async getById(
     userId: string,
     portfolioId: string
@@ -38,18 +53,11 @@ export class PortfolioService {
         .where({
           portfolio_id: portfolioId,
           user_id: userId
-        })
-        .include("skill")
-        .include("certification")
-        .include("experience")
-        .include("project")
-        .first()
+        }).include("skill").include("certification").include("experience").include("project").first()
 
     if (!portfolio) {
       const error = new Error("Portfolio not found");
-
       (error as Error & { statusCode?: number }).statusCode = 404;
-
       throw error;
     }
 
