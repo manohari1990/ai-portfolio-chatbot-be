@@ -5,23 +5,26 @@
   "license": "ISC",
   "author": "Manohari",
   "type": "module",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/server.js",
-    "build": "tsc",
-    "dev": "tsx watch server.ts",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
     "postinstall": "prisma skills sync || exit 0",
     "contract:emit": "prisma contract emit"
   },
   "dependencies": {
     "@google/genai": "^2.27.0",
     "@prisma/client": "^7.10.0",
+    "bcryptjs": "latest",
     "@prisma/orm-postgres": "^8.0.0-rc.12",
     "cors": "^2.8.6",
+    "jsonwebtoken": "latest",
     "dotenv": "^18.0.4",
     "express": "^5.2.1",
     "nodemon": "^3.1.14",
+    "pg": "latest",
     "zod": "^4.6.5"
   },
   "devDependencies": {
@@ -29,6 +32,8 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.2",
+    "@types/jsonwebtoken": "latest",
+    "@types/pg": "latest",
     "prisma": "^8.0.0-rc.17",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"

@@ -1,6 +1,6 @@
 import type { Response, Request } from "express"
 import { ChatService } from "./service"
-import { PortfolioService } from "../portfolio/service"
+import { PortfolioService, } from "../portfolio/service"
 import { buildPortfolioContext, portfolioSystemPropmt } from "./ai/portfolio.context"
 import { GeminiProvider } from "./ai/genai.provider"
 
@@ -87,17 +87,47 @@ export const NewChatController = async (request: Request, response: Response) =>
  * GET request
  * Body Parameters: 
  * {
- *  "portfolio_id": "portfolio-uuid",
- *  "message": "What technologies do you have experience with?"
+ *  "portfolio_id": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
  * }
  * Response:
  * {
  *  "success": true,
- *  "message": "I have experience with React, Node.js, Python and AWS..."
+ *  "message": [
+ *          {
+ *              message_id: "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+ *              session_id: "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+ *              message: "lorem impsum....",
+ *              role: "user"
+ *          },
+ *          {
+ *              message_id: "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+ *              session_id: "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+ *              message: "lorem impsum....",
+ *              role: "system"
+ *          }
+ *      ],
+ *   "total": 100,
+ *   "records_per_page": 10,
+ *   "page": 1
  *  }
  */
-export const FetchChatController = (request: Request, response: Response) => {
-    console.log(request)
+export const FetchUserChatController = async (request: Request, response: Response) => {
+    // 1. read the inputs from request body.
+    const requestBody = request.params
+    try{
+        // 2. pass the params to the fetch service
+        const res = await ChatService.fetchAllChat(requestBody)
+        return response.status(200).json({
+            success: true,
+            data: res,
+            message: "Records fetched successfully!"
+        })
+    }catch(err){
+        return response.status(500).json({
+            success: false,
+            message: "Internal server error!"
+        })
+    }
 }
 
 
@@ -105,8 +135,7 @@ export const FetchChatController = (request: Request, response: Response) => {
  * POST request
  * Body Parameters: 
  * {
- *  "portfolio_id": "portfolio-uuid",
- *  "message": "What technologies do you have experience with?"
+ *  "session_id": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
  * }
  * Response:
  * {
@@ -114,6 +143,20 @@ export const FetchChatController = (request: Request, response: Response) => {
  *  "message": "I have experience with React, Node.js, Python and AWS..."
  *  }
  */
-export const DeleteChatController = (request: Request, response: Response) => {
-    console.log(request)
+export const DeleteChatBySessionController = async (request: Request, response: Response) => {
+    const requestParam = request.params
+    console.log(requestParam,"=============requestParam")
+
+    try{
+        const resp = await ChatService.deleteBySessionId(requestParam)
+        return response.status(204).json({
+            success: true,
+            message: 'Record deleted!'
+        })
+    }catch(err){
+        return response.status(500).json({
+            success: false,
+            message: 'Internal server error!'
+        })
+    }
 }

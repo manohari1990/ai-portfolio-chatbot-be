@@ -1,5 +1,5 @@
 import { includes } from "zod";
-import { db } from "../../prisma/db";
+import { db } from "../../db";
 import type {
   CreatePortfolioInput,
   UpdatePortfolioInput,

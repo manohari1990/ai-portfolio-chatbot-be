@@ -1,4 +1,4 @@
-import { db } from "../../prisma/db";
+import { db } from "../../db";
 
 export const CreatePortfolioProfile = async (
   portfolioId: string,

@@ -1,4 +1,4 @@
-import { db } from "../../prisma/db";
+import { db } from "../../db";
 interface ChatServiceProps {
   portfolio_id: string,
   message: string,
@@ -28,5 +28,32 @@ export class ChatService {
       portfolio_id: chatProps.portfolio_id,
       visitor_id: 'b82ac7fc-66d5-50db-a7a8-ec6a25555ce8' // chatProps.visitor
     })
+  }
+
+  static async fetchAllChat(
+    chatProps: {
+      id?: string
+    }
+  ) {
+    return await db.orm.public.ChatSession
+      .where({ portfolio_id: chatProps.id })
+      .include('chat_message', (message) =>
+        message
+          .orderBy((msg)=> msg.created_at.desc())
+          .limit(5)
+      )
+      .orderBy((session)=> session.started_at.desc())
+      .all()
+  }
+
+  static async deleteBySessionId(
+    chatProps: {
+      id?: string
+    }
+  ){
+    console.log(chatProps.id,"====================chatProps")
+    return await db.orm.public.ChatSession
+      .where({session_id: chatProps.id})
+      .delete()
   }
 }
